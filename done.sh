@@ -1,3 +1,3 @@
-sudo git add .
-sudo git commit -m 'Decor website'
-sudo git push
+git add .
+git commit -m 'Decor website'
+git push
