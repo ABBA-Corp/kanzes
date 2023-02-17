@@ -7,7 +7,7 @@ class News(models.Model):
 	description_uz = models.CharField(max_length = 10000, blank = True)
 	description_ru = models.CharField(max_length = 10000, blank = True)
 	description_en = models.CharField(max_length = 10000, blank = True)
-	image = models.ImageField(upload_to = 'media/news', blank = True)
+	image = models.ImageField(upload_to = 'news', blank = True)
 	date = models.CharField(max_length = 100, blank = True)
 
 class NewsComment(models.Model):
@@ -27,7 +27,7 @@ class Category(models.Model):
 	description_uz = models.CharField(max_length = 10000, blank = True)
 	description_ru = models.CharField(max_length = 10000, blank = True)
 	description_en = models.CharField(max_length = 10000, blank = True)
-	image = models.ImageField(upload_to = 'media/category', blank = True)
+	image = models.ImageField(upload_to = 'category', blank = True)
 
 class Product(models.Model):
 	category_id = models.ForeignKey('Category', on_delete = models.CASCADE, blank = True)
@@ -40,10 +40,10 @@ class Product(models.Model):
 	description_uz = models.CharField(max_length = 10000, blank = True)
 	description_ru = models.CharField(max_length = 10000, blank = True)
 	description_en = models.CharField(max_length = 10000, blank = True)
-	image = models.ImageField(upload_to = 'media/product', blank = True)
-	image1 = models.ImageField(upload_to = 'media/product', blank = True)
-	image2 = models.ImageField(upload_to = 'media/product', blank = True)
-	image3 = models.ImageField(upload_to = 'media/product', blank = True)
+	image = models.ImageField(upload_to = 'product', blank = True)
+	image1 = models.ImageField(upload_to = 'product', blank = True)
+	image2 = models.ImageField(upload_to = 'product', blank = True)
+	image3 = models.ImageField(upload_to = 'product', blank = True)
 	color1 = models.CharField(max_length = 100, blank = True)
 	color2 = models.CharField(max_length = 100, blank = True)
 	color3 = models.CharField(max_length = 100, blank = True)
@@ -59,7 +59,7 @@ class OurWork(models.Model):
 	description_uz = models.CharField(max_length = 10000, blank = True)
 	description_ru = models.CharField(max_length = 10000, blank = True)
 	description_en = models.CharField(max_length = 10000, blank = True)
-	image = models.ImageField(upload_to = 'media/our_work', blank = True)
+	image = models.ImageField(upload_to = 'our_work', blank = True)
 
 class FAQ(models.Model):
 	question_uz = models.CharField(max_length = 1000, blank = True)

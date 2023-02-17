@@ -1,1 +1,1 @@
-sudo gunicorn --bind 0.0.0.0:80 kanzes.wsgi --daemon
+sudo gunicorn --bind 0.0.0.0:80 core.wsgi --daemon
