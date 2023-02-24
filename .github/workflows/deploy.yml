@@ -1,0 +1,43 @@
+name: Production Django deploy Kanzes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: GIT pulling from github repository
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        source: "."
+        target: "/home/backend/kanzes"
+
+    - name: Command using from script
+      uses: appleboy/ssh-action@master
+      env:
+        DJANGO_SETTINGS_MODULE: "core.production"
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        envs: DJANGO_SETTINGS_MODULE
+        script_stop: true
+        script: |
+          git --work-tree=/home/backend/kanzes --git-dir=/home/backend/kanzes/.git clean -f .
+          /home/backend/kanzes/venv/bin/pip install -r /home/backend/kanzes/production.txt
+          /home/backend/kanzes/venv/bin/python /home/backend/kanzes/manage_prod.py migrate
+          systemctl restart kanzes.service
+          sh /home/devops/kanzes_back.sh "${{ github.event.head_commit.message }}"
